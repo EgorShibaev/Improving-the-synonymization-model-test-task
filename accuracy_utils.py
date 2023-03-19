@@ -38,7 +38,7 @@ def accuracy_for_one(
 
   return (rank_heads.item(), rank_tails.item())
 
-# return MR and Hits@10
+# return MR and Hits@10 (without filtering)
 def mean_accuracy(
     ent_emb: Tensor, 
     rel_emb: Tensor, 

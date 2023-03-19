@@ -6,7 +6,8 @@ from torch import Tensor
 
 from typing import Tuple
 
-# takes head, tails and number of nodes and returns corrupded heads and tails
+# takes head, tails and number of nodes
+# returns corrupded heads and tails
 def corrupted_triplets(
     head: Tensor, 
     tail: Tensor, 
@@ -49,12 +50,12 @@ class TransE(nn.Module):
     self.rel_embs = torch.zeros((num_diff_edges, k))
     self.rel_embs.uniform_(rand_lower_bound, rand_upper_bound)
     self.rel_embs = F.normalize(self.rel_embs, dim=1)
-    self.rel_embs = self.rel_embs.requires_grad_()
+    self.rel_embs = nn.Parameter(self.rel_embs.requires_grad_())
 
     # embeddings for enteties
     self.ent_embs = torch.zeros((num_nodes, k))
     self.ent_embs.uniform_(rand_lower_bound, rand_upper_bound)
-    self.ent_embs = self.ent_embs.requires_grad_()
+    self.ent_embs = nn.Parameter(self.ent_embs.requires_grad_())
 
 
   # take triplet (h, l, t) and return dissimilarity of h + l and t  
