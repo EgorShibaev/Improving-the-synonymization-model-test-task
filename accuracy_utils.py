@@ -49,6 +49,7 @@ def mean_accuracy(
   hits10 = 0
 
   for triplet in triplets.t():
+    # take two ranks (replaced heads and tails) and update accumulators
     r1, r2 = accuracy_for_one(ent_emb, rel_emb, triplet, p_norm)
     ranks_sum += r1 + r2
     hits10 += (r1 < 10) + (r2 < 10)
